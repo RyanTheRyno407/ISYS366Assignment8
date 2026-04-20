@@ -1,3 +1,4 @@
+using Assignment8.APIUtils;
 using Assignment8.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +14,7 @@ builder.Services.AddDbContext<Assignment8Context>(options =>
 
 builder.Services.AddScoped<IMovieRepo,MovieRepoEF>();
 
-
+builder.Services.AddOpenApi();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,5 +24,5 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.MapEndPoints();
 app.Run();

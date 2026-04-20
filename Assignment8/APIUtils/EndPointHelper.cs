@@ -7,22 +7,22 @@ namespace Assignment8.APIUtils
     {
         public static void MapEndPoints(this WebApplication app)
         {
-            app.MapGet("/movies", GetAllMoviesAsync);
-            app.MapGet("/movie/{id:int}", GetMovieByIdAsync);
+            app.MapGet("/movies", GetAllMoviesAsync).WithName("GetAllMoviesAsync");
+            app.MapGet("/movie/{id:int}", GetMovieByIdAsync).WithName("GetMovieByIdAsync");
 
-            app.MapPost("/movie", PostMovieAsync);
-            app.MapDelete("/movie/{id:int}", DeleteMovieAsync);
+            //app.MapPost("/movie", PostMovieAsync);
+            //app.MapDelete("/movie/{id:int}", DeleteMovieAsync);
         }
 
-        public static IResult GetAllMoviesAsync(IMovieRepo repo)
+        public static async Task<IResult> GetAllMoviesAsync(IMovieRepo repo)
         {
-            return Results.Ok(repo.GetAllAsync());
+            return Results.Ok(await repo.GetAllAsync());
         }
-        public static IResult GetMovieByIdAsync(int id, IMovieRepo repo)
+        public static  async Task<IResult> GetMovieByIdAsync(int id, IMovieRepo repo)
         {
             try 
             { 
-                Movie? movie = repo.GetById(id);
+                Movie? movie = await repo.GetByIdAsync(id);
                 if (movie != null)
                 {
                     return Results.Ok(movie);
