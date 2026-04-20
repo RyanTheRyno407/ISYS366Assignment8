@@ -4,16 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using RazorPagesMovie.Models;
+using Assignment8.Models;
 
-namespace RazorPagesMovie.Data
+namespace Assignment8.Data
 {
-    public class RazorPagesMovieContext : IdentityDbContext
+    public class Assignment8Context : IdentityDbContext
     {
-        public RazorPagesMovieContext(DbContextOptions<RazorPagesMovieContext> options) : base(options)
+        public Assignment8Context(DbContextOptions<Assignment8Context> options) : base(options)
         {
         }
 
-        public DbSet<RazorPagesMovie.Models.Movie> Movie { get; set; } = default!;
+        public DbSet<Assignment8.Models.Movie> Movie { get; set; } = default!;
     }
 }

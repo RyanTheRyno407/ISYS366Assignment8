@@ -1,8 +1,8 @@
-﻿namespace RazorPagesMovie.Data
+﻿namespace Assignment8.Data
 {
     public class MovieRepoList : IMovieRepo
     {
-        private readonly List<RazorPagesMovie.Models.Movie> _movies;
+        private readonly List<Assignment8.Models.Movie> _movies;
 
         public MovieRepoList()
         {
@@ -15,22 +15,22 @@
         };
         }
 
-        public IEnumerable<RazorPagesMovie.Models.Movie> GetAll() 
+        public IEnumerable<Assignment8.Models.Movie> GetAll() 
         {
             return _movies.OrderBy(m => m.Rank).ThenBy(m => m.Title).ToList();
         }
 
-        public async Task<IEnumerable<RazorPagesMovie.Models.Movie>> GetAllAsync()//
+        public async Task<IEnumerable<Assignment8.Models.Movie>> GetAllAsync()//
         {
             return await Task.FromResult(GetAll());
         }
 
-        public RazorPagesMovie.Models.Movie? GetById(int id)//
+        public Assignment8.Models.Movie? GetById(int id)//
         {
             return _movies.FirstOrDefault(m => m.Id == id);
         }
 
-        public async Task<RazorPagesMovie.Models.Movie> GetByIdAsync(int? id)//
+        public async Task<Assignment8.Models.Movie> GetByIdAsync(int? id)//
         {
             if (id == null)
             {
@@ -39,13 +39,13 @@
             return await Task.FromResult(_movies.FirstOrDefault(m => m.Id == id.Value));
         }
 
-        public async Task AddAsync(RazorPagesMovie.Models.Movie movie)//
+        public async Task AddAsync(Assignment8.Models.Movie movie)//
         {
             _movies.Add(movie);
             await Task.CompletedTask;
         }
 
-        public async Task RemoveAsync(RazorPagesMovie.Models.Movie movie)//
+        public async Task RemoveAsync(Assignment8.Models.Movie movie)//
         {
             _movies.Remove(movie);
             await Task.CompletedTask;

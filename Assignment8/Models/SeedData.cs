@@ -1,15 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RazorPagesMovie.Data;
+using Assignment8.Data;
 
-namespace RazorPagesMovie.Models;
+namespace Assignment8.Models;
 
 public static class SeedData
 {
     public static void Initialize(IServiceProvider serviceProvider)
     {
-        using (var context = new RazorPagesMovieContext(
+        using (var context = new Assignment8Context(
             serviceProvider.GetRequiredService<
-                DbContextOptions<RazorPagesMovieContext>>()))
+                DbContextOptions<Assignment8Context>>()))
         {
             if (context == null || context.Movie == null)
             {

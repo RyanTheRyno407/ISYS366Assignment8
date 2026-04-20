@@ -1,18 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RazorPagesMovie.Models;
+using Assignment8.Models;
 
-namespace RazorPagesMovie.Data;
+namespace Assignment8.Data;
 
 public class MovieRepoEF : IMovieRepo
 {
-    private readonly RazorPagesMovieContext _context;
+    private readonly Assignment8Context _context;
 
-    public MovieRepoEF(RazorPagesMovieContext context)
+    public MovieRepoEF(Assignment8Context context)
     {
         _context = context;
     }
 
-    public IEnumerable<RazorPagesMovie.Models.Movie> GetAll()//
+    public IEnumerable<Assignment8.Models.Movie> GetAll()//
     {
         return _context.Movie.OrderBy(m => m.Rank).ThenBy(m => m.Title).ToList();
     }
@@ -23,13 +23,13 @@ public class MovieRepoEF : IMovieRepo
     }
 
 
-    public RazorPagesMovie.Models.Movie? GetById(int id)//
+    public Assignment8.Models.Movie? GetById(int id)//
     {
         return _context.Movie.FirstOrDefault(m => m.Id == id);
     }
 
 
-    public async Task<RazorPagesMovie.Models.Movie?> GetByIdAsync(int? id)//
+    public async Task<Assignment8.Models.Movie?> GetByIdAsync(int? id)//
     {
         return await _context.Movie.FirstOrDefaultAsync(m => m.Id == id);
     }

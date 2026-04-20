@@ -1,6 +1,6 @@
-﻿using RazorPagesMovie.Models;
+﻿using Assignment8.Models;
 
-namespace RazorPagesMovie.Data
+namespace Assignment8.Data
 {
     public interface IMovieRepo
     {
