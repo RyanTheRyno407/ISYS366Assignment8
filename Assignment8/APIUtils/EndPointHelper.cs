@@ -7,7 +7,11 @@ namespace Assignment8.APIUtils
     {
         public static void MapEndPoints(this WebApplication app)
         {
-            
+            app.MapGet("/movies", GetAllMoviesAsync);
+            app.MapGet("/movie/{id:int}", GetMovieByIdAsync);
+
+            app.MapPost("/movie", PostMovieAsync);
+            app.MapDelete("/movie/{id:int}", DeleteMovieAsync);
         }
 
         public static IResult GetAllMoviesAsync(IMovieRepo repo)

@@ -1,6 +1,26 @@
 @Assignment8_HostAddress = http://localhost:5260
 
-GET{{Assignment8_HostAddress}}/
+GET{{Assignment8_HostAddress}}/movies/
+accept: application/json
 
 ###
 
+GET{{Assignment8_HostAddress}}/movies/
+accept: application/json
+
+###
+
+POST{{Assignment8_HostAddress}}/movies/
+accept: application/json
+
+###
+
+DELETE{{Assignment8_HostAddress}}/movies/
+accept: application/json
+
+###
+
+PUT{{Assignment8_HostAddress}}/movies/
+accept: application/json
+
+###
