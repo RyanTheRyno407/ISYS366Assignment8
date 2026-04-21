@@ -10,8 +10,8 @@ namespace Assignment8.APIUtils
             app.MapGet("/movies", GetAllMoviesAsync).WithName("GetAllMoviesAsync");
             app.MapGet("/movie/{id:int}", GetMovieByIdAsync).WithName("GetMovieByIdAsync");
 
-            //app.MapPost("/movie", PostMovieAsync);
-            //app.MapDelete("/movie/{id:int}", DeleteMovieAsync);
+            app.MapPost("/movie", PostMovieAsync);
+            app.MapDelete("/movie/{id:int}", DeleteMovieAsync);
         }
 
         public static async Task<IResult> GetAllMoviesAsync(IMovieRepo repo)
