@@ -10,19 +10,29 @@ namespace Assignment8.APIUtils
             app.MapGet("/movies", GetAllMoviesAsync).WithName("GetAllMoviesAsync");
             app.MapGet("/movie/{id:int}", GetMovieByIdAsync).WithName("GetMovieByIdAsync");
 
-            app.MapPost("/movie", PostMovieAsync);
-            app.MapDelete("/movie/{id:int}", DeleteMovieAsync);
+            app.MapPost("/movie", PostMovieAsync).WithName("PostMovieAsync");
+            app.MapPut("/movie/{id:int}", UpdatedMovie).WithName("Update");
+            app.MapDelete("/movie/{id:int}", DeleteMovieAsync).WithName("DeleteMovieAsync");
         }
 
         public static async Task<IResult> GetAllMoviesAsync(IMovieRepo repo)
         {
-            return Results.Ok(await repo.GetAllAsync());
+            try
+            {
+                IEnumerable<Movie> movies = await repo.GetAllAsync();
+                return Results.Ok(movies);
+
+            }
+            catch (Exception ex)
+            {
+                return Results.Problem(ex.Message);
+            }
         }
-        public static  async Task<IResult> GetMovieByIdAsync(int id, IMovieRepo repo)
+        public static async Task<IResult> GetMovieByIdAsync(int id, IMovieRepo repo)
         {
-            try 
-            { 
-                Movie? movie = await repo.GetByIdAsync(id);
+            try
+            {
+                Movie? movie = await repo.GetByIdAsync((int?)id);
                 if (movie != null)
                 {
                     return Results.Ok(movie);
@@ -38,30 +48,35 @@ namespace Assignment8.APIUtils
             }
         }
 
-        public static IResult PostMovieAsync( Movie movie, IMovieRepo repo)
+        public static async Task<IResult> PostMovieAsync(Movie movie, IMovieRepo repo)
         {
             try
             {
-                movie.Id = 0;
-                repo.AddAsync(movie);
-                return Results.Ok();
+
+                await repo.AddAsync(movie);
+                await repo.Save();
+
+                return Results.Created($"/movie/{movie.Id}", movie);
+                //Might need to change this to CreatedAtRoute or something similar to return the created movie with its new ID.
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 return Results.Problem(ex.Message);
             }
 
-            // AddAsync will be used here from the repo to add a new movie to the database.
         }
 
-        public static IResult DeleteMovieAsync(int id, IMovieRepo repo)
+        public static async Task<IResult> DeleteMovieAsync(int id, IMovieRepo repo)
         {
             try
             {
-                Movie? movie = repo.GetById(id);
+                Movie? movie = repo.GetByIdAsync(id);
                 if (movie != null)
                 {
                     repo.RemoveAsync(movie);
-                    return Results.Ok();
+                    await repo.Save();
+
+                    return Results.Ok(movie);
                 }
                 else
                 {
@@ -72,28 +87,32 @@ namespace Assignment8.APIUtils
             catch (Exception ex)
             {
                 return Results.Problem(ex.Message);
-                // RemoveAsync will be used here from the repo to remove a movie from the database.
+
             }
         }
 
-        //public static IResult PutMovieAsync(Movie movie, IMovieRepo repo)
-        //{
-        //    try
-        //    {
-        //        if (repo.(movie))
-        //        {
-        //            return Results.Ok();
-        //        }
-        //        return Results.Problem("Can't update movie");
-        //    }
-        //    catch
-        //    {
-        //        return Results.NotFound();
-        //    }
+        public static async Task<IResult> UpdatedMovie(int id, Movie updatedMovie, IMovieRepo repo)
+        {
+            try
+            {
+                Movie? existingMovie = repo.GetByIdAsync(id);
 
-        //    // UpdateAsync will be used here from the repo to update an existing movie in the database.
-        //}
+                if (existingMovie == null)
+                {
+                    return Results.NotFound();
+                }
 
-        
+                updatedMovie.Id = id;
+
+                repo.Update(updatedMovie);
+
+                return Results.Ok(updatedMovie);
+            }
+            catch (Exception ex)
+            {
+                return Results.Problem(ex.Message);
+            }
+
+            }
     }
 }

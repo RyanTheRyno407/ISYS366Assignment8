@@ -8,9 +8,9 @@ using Assignment8.Models;
 
 namespace Assignment8.Data
 {
-    public class Assignment8Context : IdentityDbContext
+    public class RazorPagesMovieContext : IdentityDbContext
     {
-        public Assignment8Context(DbContextOptions<Assignment8Context> options) : base(options)
+        public RazorPagesMovieContext(DbContextOptions<RazorPagesMovieContext> options) : base(options)
         {
         }
 

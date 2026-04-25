@@ -25,7 +25,7 @@
             return await Task.FromResult(GetAll());
         }
 
-        public Assignment8.Models.Movie? GetById(int id)//
+        public Assignment8.Models.Movie? GetByIdAsync(int id)//
         {
             return _movies.FirstOrDefault(m => m.Id == id);
         }
@@ -51,7 +51,21 @@
             await Task.CompletedTask;
         }
 
-        public async Task SaveChangesAsync()//
+        public void Update(Assignment8.Models.Movie movie)//
+        {
+            var existingMovie = _movies.FirstOrDefault(m => m.Id == movie.Id);
+            if (existingMovie != null)
+            {
+                existingMovie.Title = movie.Title;
+                existingMovie.ReleaseDate = movie.ReleaseDate;
+                existingMovie.Genre = movie.Genre;
+                existingMovie.Price = movie.Price;
+                existingMovie.Rank = movie.Rank;
+                existingMovie.Image = movie.Image;
+            }
+        }
+
+        public async Task Save()//
         {
             await Task.CompletedTask;
         }

@@ -7,9 +7,10 @@ namespace Assignment8.Data
         Task AddAsync(Movie movie);//
         IEnumerable<Movie> GetAll();//
         Task<IEnumerable<Movie>> GetAllAsync();//
-        Movie? GetById(int id);//
+        Movie? GetByIdAsync(int id);//
         Task<Movie?> GetByIdAsync(int? id);//
         Task RemoveAsync(Movie movie);//
-        Task SaveChangesAsync();//
+        void Update(Movie movie);//
+        Task Save();//
     }
 }

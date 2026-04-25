@@ -9,8 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-builder.Services.AddDbContext<Assignment8Context>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Assignment8Context")));
+builder.Services.AddDbContext<RazorPagesMovieContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("RazorPagesMovieContext")));
 
 builder.Services.AddScoped<IMovieRepo,MovieRepoEF>();
 

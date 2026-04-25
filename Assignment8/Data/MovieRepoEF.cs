@@ -5,9 +5,9 @@ namespace Assignment8.Data;
 
 public class MovieRepoEF : IMovieRepo
 {
-    private readonly Assignment8Context _context;
+    private readonly RazorPagesMovieContext _context;
 
-    public MovieRepoEF(Assignment8Context context)
+    public MovieRepoEF(RazorPagesMovieContext context)
     {
         _context = context;
     }
@@ -23,7 +23,7 @@ public class MovieRepoEF : IMovieRepo
     }
 
 
-    public Assignment8.Models.Movie? GetById(int id)//
+    public Assignment8.Models.Movie? GetByIdAsync(int id)//
     {
         return _context.Movie.FirstOrDefault(m => m.Id == id);
     }
@@ -45,7 +45,13 @@ public class MovieRepoEF : IMovieRepo
         _context.Movie.Remove(movie);
         await _context.SaveChangesAsync();
     }
-     public async Task SaveChangesAsync()//
+
+    public void Update(Movie movie)
+    {
+        _context.Attach(movie).State = EntityState.Modified;
+    }
+
+     public async Task Save()//
     {
         await _context.SaveChangesAsync();
     }
