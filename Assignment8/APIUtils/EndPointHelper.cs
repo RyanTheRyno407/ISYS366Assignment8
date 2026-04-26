@@ -63,7 +63,7 @@ namespace Assignment8.APIUtils
                 await repo.AddAsync(movie);
                 await repo.Save();
 
-                return Results.Created($"/movie/{movie.Id}", movie);
+                return Results.CreatedAtRoute("GetMovieByIdAsync", new { id = movie.Id }, movie);
                 //Might need to change this to CreatedAtRoute or something similar to return the created movie with its new ID.
             }
             
@@ -83,7 +83,7 @@ namespace Assignment8.APIUtils
                 {
                     return Results.NotFound();
                 }
-                 repo.RemoveAsync(movie);
+                 await repo.RemoveAsync(movie);
                  await repo.Save();
 
                  return Results.Ok(movie);
