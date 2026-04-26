@@ -16,23 +16,16 @@ accept: application/json
 POST {{Assignment8_HostAddress}}/movie
 content-Type: application/json
 {
-  "Title": "Five Nights at Freddy's",
-  "ReleaseDate": "2015-07-12"
-  "Genre": "Horror",
-  "Price": 9.99,
-  "Rank": 5,
-  "Image":
+  "title": "Five Nights at Freddy's",
+  "releaseDate": "2015-07-12",
+  "genre": "Horror",
+  "price": 9.99,
+  "rank": 5
 }
 
 ###
-//400 bad request
-//Unhandled exception
 
-# fail: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]
-#       An unhandled exception has occurred while executing the request.
-#       Microsoft.AspNetCore.Http.BadHttpRequestException: Implicit body inferred for parameter "movie" but no body was provided. Did you mean to use a Service instead?
-
-DELETE {{Assignment8_HostAddress}}/movie/30
+DELETE {{Assignment8_HostAddress}}/movie/35
 accept: application/json
 
 ###
@@ -42,22 +35,19 @@ accept: application/json
 PUT {{Assignment8_HostAddress}}/movie/34
 content-Type: application/json
 {
-  "Id": 34",
-  "Title": "Superman",
-  "ReleaseDate": "2025-03-04",
-  "Genre": "Comedy",
-  "Price": 14.99,
-  "Rank": 2,
-  "Image": 
-
+  "id": 34,
+  "title": "Superman",
+  "releaseDate": "2025-03-04",
+  "genre": "Comedy",
+  "price": 14.99,
+  "rank": 2,
+  "image": "\\images\\Movies\\47d1a8f3-1691-48db-a680-51325f3fca97.jpg"
+}
 
 
 ###
 
-
-
 //400 bad request
-
 # fail: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]
 #       An unhandled exception has occurred while executing the request.
 #       Microsoft.AspNetCore.Http.BadHttpRequestException: Implicit body inferred for parameter "updatedMovie" but no body was provided. Did you mean to use a Service instead?
