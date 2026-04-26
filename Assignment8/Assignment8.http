@@ -24,6 +24,7 @@ content-Type: application/json
 }
 
 ###
+//works, kind of, error 201 Created, but the response body is empty, should return the created movie with its new id. Doesn't have an image.
 
 DELETE {{Assignment8_HostAddress}}/movie/35
 accept: application/json
