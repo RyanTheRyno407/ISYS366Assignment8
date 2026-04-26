@@ -4,24 +4,14 @@ GET {{Assignment8_HostAddress}}/movies
 accept: application/json
 
 ###
-//500 internal server error
-//Db context error
+//Works
 
-# fail: Microsoft.EntityFrameworkCore.Database.Connection[20004]
-#       An error occurred using the connection to database '' on server ''.
-# fail: Microsoft.EntityFrameworkCore.Query[10100]
-#       An exception occurred while iterating over the results of a query for context type 'Assignment8.Data.RazorPagesMovieContext'.
-
-GET {{Assignment8_HostAddress}}/movie/3
+GET {{Assignment8_HostAddress}}/movie/8
 accept: application/json
 
 ###
-//500 internal server error
-//DB context error
-# fail: Microsoft.EntityFrameworkCore.Database.Connection[20004]
-#       An error occurred using the connection to database '' on server ''.
-# fail: Microsoft.EntityFrameworkCore.Query[10100]
-#       An exception occurred while iterating over the results of a query for context type 'Assignment8.Data.RazorPagesMovieContext'.
+//works   
+
 
 POST {{Assignment8_HostAddress}}/movie
 accept: application/json
@@ -34,18 +24,15 @@ accept: application/json
 #       An unhandled exception has occurred while executing the request.
 #       Microsoft.AspNetCore.Http.BadHttpRequestException: Implicit body inferred for parameter "movie" but no body was provided. Did you mean to use a Service instead?
 
-DELETE {{Assignment8_HostAddress}}/movie/1
+DELETE {{Assignment8_HostAddress}}/movie/26
 accept: application/json
 
 ###
-//500 internal server error
+// 500 internal server error
+//DID delete movie
 
-# fail: Microsoft.EntityFrameworkCore.Database.Connection[20004]
-#       An error occurred using the connection to database '' on server ''.
-# fail: Microsoft.EntityFrameworkCore.Query[10100]
-#       An exception occurred while iterating over the results of a query for context type 'Assignment8.Data.RazorPagesMovieContext'.
 
-PUT {{Assignment8_HostAddress}}/movie/4
+PUT {{Assignment8_HostAddress}}/movie/28
 accept: application/json
 
 ###

@@ -7,7 +7,8 @@ namespace Assignment8.APIUtils
     {
         public static void MapEndPoints(this WebApplication app)
         {
-            app.MapGet("/movies", GetAllMoviesAsync).WithName("GetAllMoviesAsync");
+            app.MapGet("/movies", GetAllMoviesAsync).WithName("GetAllMoviesAsync");//works
+
             app.MapGet("/movie/{id:int}", GetMovieByIdAsync).WithName("GetMovieByIdAsync");
 
             app.MapPost("/movie", PostMovieAsync).WithName("PostMovieAsync");
@@ -50,8 +51,14 @@ namespace Assignment8.APIUtils
 
         public static async Task<IResult> PostMovieAsync(Movie movie, IMovieRepo repo)
         {
+           
             try
             {
+
+                if (movie == null)
+                {
+                    return Results.NotFound();
+                }
 
                 await repo.AddAsync(movie);
                 await repo.Save();
@@ -59,6 +66,7 @@ namespace Assignment8.APIUtils
                 return Results.Created($"/movie/{movie.Id}", movie);
                 //Might need to change this to CreatedAtRoute or something similar to return the created movie with its new ID.
             }
+            
             catch (Exception ex)
             {
                 return Results.Problem(ex.Message);
@@ -71,17 +79,14 @@ namespace Assignment8.APIUtils
             try
             {
                 Movie? movie = repo.GetByIdAsync(id);
-                if (movie != null)
-                {
-                    repo.RemoveAsync(movie);
-                    await repo.Save();
-
-                    return Results.Ok(movie);
-                }
-                else
+                if (movie == null)
                 {
                     return Results.NotFound();
                 }
+                 repo.RemoveAsync(movie);
+                 await repo.Save();
+
+                 return Results.Ok(movie);
 
             }
             catch (Exception ex)
@@ -105,6 +110,7 @@ namespace Assignment8.APIUtils
                 updatedMovie.Id = id;
 
                 repo.Update(updatedMovie);
+                await repo.Save();
 
                 return Results.Ok(updatedMovie);
             }
