@@ -25,7 +25,7 @@
             return await Task.FromResult(GetAll());
         }
 
-        public Assignment8.Models.Movie? GetByIdAsync(int id)//
+        public async Task <Assignment8.Models.Movie?> GetByIdAsync(int id)//
         {
             return _movies.FirstOrDefault(m => m.Id == id);
         }
@@ -51,7 +51,7 @@
             await Task.CompletedTask;
         }
 
-        public void Update(Assignment8.Models.Movie movie)//
+        public async Task Update(Assignment8.Models.Movie movie)//
         {
             var existingMovie = _movies.FirstOrDefault(m => m.Id == movie.Id);
             if (existingMovie != null)

@@ -33,7 +33,7 @@ namespace Assignment8.APIUtils
         {
             try
             {
-                Movie? movie = await repo.GetByIdAsync((int?)id);
+                Movie? movie = await repo.GetByIdAsync(id);
                 if (movie != null)
                 {
                     return Results.Ok(movie);
@@ -78,7 +78,7 @@ namespace Assignment8.APIUtils
         {
             try
             {
-                Movie? movie = repo.GetByIdAsync(id);
+                Movie? movie = await repo.GetByIdAsync(id);
                 if (movie == null)
                 {
                     return Results.NotFound();
@@ -100,16 +100,19 @@ namespace Assignment8.APIUtils
         {
             try
             {
-                Movie? existingMovie = repo.GetByIdAsync(id);
-
-                if (existingMovie == null)
+                Movie? movie = await repo.GetByIdAsync(id);
+                if (movie == null)
                 {
                     return Results.NotFound();
                 }
 
-                updatedMovie.Id = id;
+                movie.Title = updatedMovie.Title;
+                movie.ReleaseDate = updatedMovie.ReleaseDate;
+                movie.Genre = updatedMovie.Genre;
+                movie.Price = updatedMovie.Price;
+                movie.Rank = updatedMovie.Rank;
+                movie.Image = updatedMovie.Image;
 
-                repo.Update(updatedMovie);
                 await repo.Save();
 
                 return Results.Ok(updatedMovie);

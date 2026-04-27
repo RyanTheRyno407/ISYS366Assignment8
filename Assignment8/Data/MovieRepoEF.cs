@@ -23,9 +23,9 @@ public class MovieRepoEF : IMovieRepo
     }
 
 
-    public Assignment8.Models.Movie? GetByIdAsync(int id)//
+    public async Task<Assignment8.Models.Movie?> GetByIdAsync(int id)//
     {
-        return _context.Movie.FirstOrDefault(m => m.Id == id);
+        return await _context.Movie.FirstOrDefaultAsync(m => m.Id == id);
     }
 
 
@@ -46,9 +46,10 @@ public class MovieRepoEF : IMovieRepo
         await _context.SaveChangesAsync();
     }
 
-    public void Update(Movie movie)
+    public async Task Update(Movie movie)
     {
         _context.Attach(movie).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
     }
 
      public async Task Save()//

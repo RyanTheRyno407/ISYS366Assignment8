@@ -48,7 +48,6 @@ content-Type: application/json
 
 ###
 
-//400 bad request
-# fail: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]
-#       An unhandled exception has occurred while executing the request.
-#       Microsoft.AspNetCore.Http.BadHttpRequestException: Implicit body inferred for parameter "updatedMovie" but no body was provided. Did you mean to use a Service instead?
+//500 internal server error
+
+
